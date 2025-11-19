@@ -1,0 +1,211 @@
+{
+  "name": "commix",
+  "displayName": "CommiX",
+  "description": "Use OpenAI, Azure, Gemini, or DeepSeek APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=16",
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "AI",
+    "OpenAI",
+    "Azure",
+    "Gemini",
+    "DeepSeek",
+    "Git",
+    "Git Commit",
+    "Commit Message",
+    "Commit Generator",
+    "Conventional Commits",
+    "Gitmoji",
+    "Commit Assistant",
+    "Semantic Commit",
+    "Auto Commit",
+    "Code Review",
+    "AI Commit",
+    "CommiX"
+  ],
+  "publisher": "paswans05",
+  "repository": "https://github.com/paswans05/commix.git",
+  "icon": "images/logo.png",
+  "activationEvents": [
+    "onCommand:commix"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.commix",
+        "icon": {
+          "dark": "images/icon.svg",
+          "light": "images/icon.svg"
+        },
+        "title": "AI Commit"
+      },
+      {
+        "command": "commix.showAvailableModels",
+        "title": "Show Available OpenAI Models"
+      }
+    ],
+    "configuration": {
+      "properties": {
+        "commix.AI_COMMIT_LANGUAGE": {
+          "default": "English",
+          "description": "Commit message language",
+          "enum": [
+            "Japanese",
+            "Korean",
+            "Czech",
+            "German",
+            "French",
+            "Italian",
+            "Dutch",
+            "Portuguese",
+            "Vietnamese",
+            "English",
+            "Spanish",
+            "Swedish",
+            "Russian",
+            "Bahasa",
+            "Polish",
+            "Turkish",
+            "Thai",
+            "Hindi"
+          ],
+          "enumDescriptions": [
+            "にほんご",
+            "한국어",
+            "česky",
+            "Deutsch",
+            "française",
+            "italiano",
+            "Nederlands",
+            "português",
+            "tiếng Việt",
+            "english",
+            "español",
+            "Svenska",
+            "русский",
+            "bahasa",
+            "Polski",
+            "Turkish",
+            "ไทย",
+            "हिन्दी"
+          ],
+          "type": "string"
+        },
+        "commix.AZURE_API_VERSION": {
+          "default": "",
+          "description": "AZURE API VERSION",
+          "type": "string"
+        },
+        "commix.OPENAI_API_KEY": {
+          "default": "",
+          "description": "OpenAI API Key",
+          "type": "string"
+        },
+        "commix.OPENAI_BASE_URL": {
+          "default": "",
+          "description": "OpenAI BASE URL",
+          "type": "string"
+        },
+        "commix.OPENAI_MODEL": {
+          "default": "gpt-4o",
+          "description": "OpenAI MODEL, you can select a model from the list by running the 'Show Available OpenAI Models' command",
+          "type": "string"
+        },
+        "commix.AI_COMMIT_SYSTEM_PROMPT": {
+          "type": "string",
+          "default": "",
+          "description": "Custom system prompt for generating commit messages"
+        },
+        "commix.OPENAI_TEMPERATURE": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "OpenAI temperature setting (0-2). Higher values make output more random, lower values more deterministic."
+        },
+        "commix.AI_PROVIDER": {
+          "type": "string",
+          "default": "openai",
+          "description": "AI Provider to use (OpenAI or Gemini)",
+          "enum": [
+            "openai",
+            "gemini"
+          ]
+        },
+        "commix.GEMINI_API_KEY": {
+          "type": "string",
+          "default": "",
+          "description": "Gemini API Key"
+        },
+        "commix.GEMINI_MODEL": {
+          "type": "string",
+          "default": "gemini-2.0-flash-001",
+          "description": "Gemini Model to use"
+        },
+        "commix.GEMINI_TEMPERATURE": {
+          "type": "number",
+          "default": 0.7,
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Gemini temperature setting (0-2). Controls randomness."
+        }
+      },
+      "title": "AI Commit"
+    },
+    "menus": {
+      "scm/title": [
+        {
+          "command": "extension.commix",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "webpack --mode production --devtool hidden-source-map",
+    "compile": "webpack",
+    "compile-tests": "tsc -p . --outDir out",
+    "lint": "eslint src --ext ts",
+    "package": "vsce package --no-dependencies",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "publish": "vsce publish --no-dependencies",
+    "test": "node ./out/test/runTest.js",
+    "vscode:prepublish": "npm run build",
+    "watch": "webpack --watch",
+    "watch-tests": "tsc -p . -w --outDir out"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.77.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "fs-extra": "^11.0.4",
+    "openai": "^4.14.2",
+    "simple-git": "^3.17.0"
+  },
+  "resolutions": {
+    "@types/node": "16.x"
+  },
+  "license": "MIT"
+}
