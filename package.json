@@ -2,7 +2,7 @@
   "name": "commix",
   "displayName": "CommiX",
   "description": "Use OpenAI, Azure, Gemini, or DeepSeek APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "node": ">=16",
     "vscode": "^1.77.0"
@@ -26,12 +26,11 @@
     "Semantic Commit",
     "Auto Commit",
     "Code Review",
-    "AI Commit",
     "CommiX"
   ],
   "publisher": "paswans05",
   "repository": "https://github.com/paswans05/commix.git",
-  "icon": "images/logo.png",
+  "icon": "assets/images/logo.png",
   "activationEvents": [
     "onCommand:commix"
   ],
@@ -40,10 +39,10 @@
       {
         "command": "extension.commix",
         "icon": {
-          "dark": "images/icon.svg",
-          "light": "images/icon.svg"
+          "dark": "assets/images/icon.svg",
+          "light": "assets/images/icon.svg"
         },
-        "title": "AI Commit"
+        "title": "CommiX"
       },
       {
         "command": "commix.showAvailableModels",
@@ -156,7 +155,7 @@
           "description": "Gemini temperature setting (0-2). Controls randomness."
         }
       },
-      "title": "AI Commit"
+      "title": "CommiX"
     },
     "menus": {
       "scm/title": [

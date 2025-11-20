@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img height="120" src="./images/logo.png">
+<img height="120" src="./assets/images/logo.png">
 
 <h1>CommiX</h1>
 

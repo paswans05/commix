@@ -3,13 +3,13 @@ import { createOpenAIApi } from './openai-utils';
 import { createGeminiAPIClient } from './gemini-utils';
 
 /**
- * Configuration keys used in the AI commit extension.
+ * Configuration keys used in the CommiX extension.
  * @constant {Object}
  * @property {string} OPENAI_API_KEY - The key for OpenAI API.
  * @property {string} OPENAI_BASE_URL - The base URL for OpenAI API.
  * @property {string} OPENAI_MODEL - The model used for OpenAI.
  * @property {string} AZURE_API_VERSION - The version of Azure API.
- * @property {string} AI_COMMIT_LANGUAGE - The language for AI commit messages.
+ * @property {string} AI_COMMIT_LANGUAGE - The language for CommiX messages.
  * @property {string} SYSTEM_PROMPT - The system prompt for generating commit messages.
  * @property {string} OPENAI_TEMPERATURE - The temperature setting for OpenAI API.
  */
@@ -29,7 +29,7 @@ export enum ConfigKeys {
 }
 
 /**
- * Manages the configuration for the AI commit extension.
+ * Manages the configuration for the CommiX extension.
  */
 export class ConfigurationManager {
   private static instance: ConfigurationManager;
