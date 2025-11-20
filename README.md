@@ -2,7 +2,7 @@
 
 <div align="center">
 
-<img height="120" src="https://github.com/paswans05/commix/assets/images/logo.png?raw=true">
+<img height="120" src="https://github.com/paswans05/commix/blob/main/assets/images/logo.png?raw=true">
 
 <h1>CommiX</h1>
 
