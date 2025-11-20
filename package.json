@@ -5,7 +5,7 @@
   "version": "0.0.3",
   "engines": {
     "node": ">=16",
-    "vscode": "^1.77.0"
+    "vscode": "^1.106.2"
   },
   "categories": [
     "Other"
