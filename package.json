@@ -2,7 +2,7 @@
   "name": "commix",
   "displayName": "CommiX",
   "description": "Use OpenAI, Azure, Gemini, or DeepSeek APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "node": ">=16",
     "vscode": "^1.77.0"

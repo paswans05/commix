@@ -1,6 +1,6 @@
 import OpenAI from 'openai';
 import { ChatCompletionMessageParam } from 'openai/resources';
-import { ConfigKeys, ConfigurationManager } from './config';
+import { ConfigKeys, ConfigurationManager } from '../config';
 
 /**
  * Creates and returns an OpenAI configuration object.

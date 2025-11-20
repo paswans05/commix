@@ -30,26 +30,7 @@ export class CommandManager {
       }
     });
 
-    /**
-     * @deprecated
-     * This function is deprecated because Gemini API does not currently support listing models via API.
-     * 
-     * Show available Gemini models
-     */
-    /*
-    this.registerCommand('commix.showAvailableGeminiModels', async () => {
-      const configManager = ConfigurationManager.getInstance();
-      const models = await configManager.getAvailableGeminiModels(); // Use the updated function
-      const selected = await vscode.window.showQuickPick(models, {
-        placeHolder: 'Please select a Gemini model'
-      });
-
-      if (selected) {
-        const config = vscode.workspace.getConfiguration('commix');
-        await config.update('GEMINI_MODEL', selected, vscode.ConfigurationTarget.Global);
-      }
-    });
-    */
+  
   }
 
   private registerCommand(command: string, handler: (...args: any[]) => any) {

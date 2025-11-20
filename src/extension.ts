@@ -21,10 +21,13 @@ export async function activate(context: vscode.ExtensionContext) {
       }
     });
 
-    const apiKey = configManager.getConfig<string>('OPENAI_API_KEY');
-    if (!apiKey) {
+    const apiOpenAIKey = configManager.getConfig<string>('OPENAI_API_KEY');
+    const apiGeminiKey = configManager.getConfig<string>('GEMINI_API_KEY');
+
+    // Show message only if BOTH keys are empty
+    if (!apiOpenAIKey && !apiGeminiKey) {
       const result = await vscode.window.showWarningMessage(
-        'OpenAI API Key not configured. Would you like to configure it now?',
+        'No API keys configured (OpenAI or Gemini). Would you like to configure them now?',
         'Yes',
         'No'
       );
@@ -32,7 +35,7 @@ export async function activate(context: vscode.ExtensionContext) {
       if (result === 'Yes') {
         await vscode.commands.executeCommand(
           'workbench.action.openSettings',
-          'commix.OPENAI_API_KEY'
+          'commix'
         );
       }
     }

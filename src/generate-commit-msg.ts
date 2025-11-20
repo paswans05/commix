@@ -3,10 +3,10 @@ import { ChatCompletionMessageParam } from 'openai/resources';
 import * as vscode from 'vscode';
 import { ConfigKeys, ConfigurationManager } from './config';
 import { getDiffStaged } from './git-utils';
-import { ChatGPTAPI } from './openai-utils';
+import { ChatGPTAPI } from './openai/openai-utils';
 import { getMainCommitPrompt } from './prompts';
-import { ProgressHandler } from './utils';
-import { GeminiAPI } from './gemini-utils';
+import { ProgressHandler } from './utils/utils';
+import { GeminiAPI } from './gemini/gemini-utils';
 
 /**
  * Generates a chat completion prompt for the commit message based on the provided diff.
