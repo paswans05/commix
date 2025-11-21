@@ -1,4 +1,4 @@
-import { ConfigKeys, ConfigurationManager } from '../configs/config';
+import { ConfigKeys, ConfigurationManager } from './config';
 
 /**
  * Initializes the main prompt for generating commit messages.

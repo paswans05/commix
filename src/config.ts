@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { createOpenAIApi } from '../providers/openai/openai-utils';
-import { createGeminiAPIClient } from '../providers/gemini/gemini-utils';
+import { createOpenAIApi } from './openai-utils';
+import { createGeminiAPIClient } from './gemini-utils';
 
 /**
  * Configuration keys used in the CommiX extension.

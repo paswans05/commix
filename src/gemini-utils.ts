@@ -1,5 +1,5 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { ConfigKeys, ConfigurationManager } from '../../configs/config';
+import { ConfigKeys, ConfigurationManager } from './config';
 
 /**
  * Creates and returns a Gemini API configuration object.
