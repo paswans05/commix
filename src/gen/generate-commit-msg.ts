@@ -1,12 +1,13 @@
 import * as fs from 'fs-extra';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import * as vscode from 'vscode';
-import { ConfigKeys, ConfigurationManager } from './config';
-import { getDiffStaged } from './git-utils';
-import { ChatGPTAPI } from './openai/openai-utils';
-import { getMainCommitPrompt } from './prompts';
-import { ProgressHandler } from './utils/utils';
-import { GeminiAPI } from './gemini/gemini-utils';
+import { ConfigKeys, ConfigurationManager } from '../configs/config';
+import { getDiffStaged } from '../utils/git-utils';
+import { ChatGPTAPI } from '../providers/openai/openai-utils';
+import { getMainCommitPrompt } from '../prompts/prompts';
+import { ProgressHandler } from '../utils/utils';
+import { GeminiAPI } from '../providers/gemini/gemini-utils';
+import { NvidiaAPI } from '../providers/nvidia/nvidia-utils';
 
 /**
  * Generates a chat completion prompt for the commit message based on the provided diff.
@@ -73,7 +74,10 @@ export async function generateCommitMsg(arg) {
       const configManager = ConfigurationManager.getInstance();
       const repo = await getRepo(arg);
 
-      const aiProvider = configManager.getConfig<string>(ConfigKeys.AI_PROVIDER, 'openai');
+      const aiProvider = configManager.getConfig<string>(
+        ConfigKeys.AI_PROVIDER,
+        'openai'
+      );
 
       progress.report({ message: 'Getting staged changes...' });
       const { diff, error } = await getDiffStaged(repo);
@@ -112,19 +116,32 @@ export async function generateCommitMsg(arg) {
         let commitMessage: string | undefined;
 
         if (aiProvider === 'gemini') {
-          const geminiApiKey = configManager.getConfig<string>(ConfigKeys.GEMINI_API_KEY);
+          const geminiApiKey = configManager.getConfig<string>(
+            ConfigKeys.GEMINI_API_KEY
+          );
           if (!geminiApiKey) {
             throw new Error('Gemini API Key not configured');
           }
           commitMessage = await GeminiAPI(messages);
-        } else {
-          const openaiApiKey = configManager.getConfig<string>(ConfigKeys.OPENAI_API_KEY);
+        } else if (aiProvider === 'nvidia') {
+          const nvidiaApiKey = configManager.getConfig<string>(
+            ConfigKeys.NVIDIA_API_KEY
+          );
+          if (!nvidiaApiKey) {
+            throw new Error('NVIDIA API Key not configured');
+          }
+          commitMessage = await NvidiaAPI(messages as ChatCompletionMessageParam[]);
+        } else if (aiProvider === 'openai') {
+          const openaiApiKey = configManager.getConfig<string>(
+            ConfigKeys.OPENAI_API_KEY
+          );
           if (!openaiApiKey) {
             throw new Error('OpenAI API Key not configured');
           }
           commitMessage = await ChatGPTAPI(messages as ChatCompletionMessageParam[]);
+        } else {
+          throw new Error('OpenAI API Key not configured');
         }
-
 
         if (commitMessage) {
           scmInputBox.value = commitMessage;
@@ -147,6 +164,21 @@ export async function generateCommitMsg(arg) {
               break;
             case 503:
               errorMessage = 'OpenAI service is temporarily unavailable';
+              break;
+          }
+        } else if (aiProvider === 'nvidia' && err.response?.status) {
+          switch (err.response.status) {
+            case 401:
+              errorMessage = 'Invalid NVIDIA API key or unauthorized access';
+              break;
+            case 429:
+              errorMessage = 'Rate limit exceeded. Please try again later';
+              break;
+            case 500:
+              errorMessage = 'NVIDIA server error. Please try again later';
+              break;
+            case 503:
+              errorMessage = 'NVIDIA service is temporarily unavailable';
               break;
           }
         } else if (aiProvider === 'gemini') {

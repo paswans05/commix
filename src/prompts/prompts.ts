@@ -1,4 +1,4 @@
-import { ConfigKeys, ConfigurationManager } from './config';
+import { ConfigKeys, ConfigurationManager } from '../configs/config';
 
 /**
  * Initializes the main prompt for generating commit messages.
@@ -114,7 +114,7 @@ Remember: All output MUST be in ${language} language. You are to act as a pure c
  */
 export const getMainCommitPrompt = async () => {
   const language = ConfigurationManager.getInstance().getConfig<string>(
-    ConfigKeys.AI_COMMIT_LANGUAGE
+    ConfigKeys.AI_LANGUAGE
   );
   return [INIT_MAIN_PROMPT(language)];
 };

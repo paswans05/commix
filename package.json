@@ -1,7 +1,7 @@
 {
   "name": "commix",
   "displayName": "CommiX",
-  "description": "Use OpenAI, Azure, Gemini, or DeepSeek APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
+  "description": "Use OpenAI, Gemini, or Nvidia APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
   "version": "0.0.3",
   "engines": {
     "node": ">=16",
@@ -51,7 +51,7 @@
     ],
     "configuration": {
       "properties": {
-        "commix.AI_COMMIT_LANGUAGE": {
+        "commix.AI_LANGUAGE": {
           "default": "English",
           "description": "Commit message language",
           "enum": [
@@ -96,9 +96,9 @@
           ],
           "type": "string"
         },
-        "commix.AZURE_API_VERSION": {
+        "commix.API_VERSION": {
           "default": "",
-          "description": "AZURE API VERSION",
+          "description": "API VERSION",
           "type": "string"
         },
         "commix.OPENAI_API_KEY": {
@@ -116,7 +116,7 @@
           "description": "OpenAI MODEL, you can select a model from the list by running the 'Show Available OpenAI Models' command",
           "type": "string"
         },
-        "commix.AI_COMMIT_SYSTEM_PROMPT": {
+        "commix.SYSTEM_PROMPT": {
           "type": "string",
           "default": "",
           "description": "Custom system prompt for generating commit messages"
@@ -131,10 +131,11 @@
         "commix.AI_PROVIDER": {
           "type": "string",
           "default": "openai",
-          "description": "AI Provider to use (OpenAI or Gemini)",
+          "description": "AI Provider to use (OpenAI , Gemini and NVIDIA)",
           "enum": [
             "openai",
-            "gemini"
+            "gemini",
+            "nvidia"
           ]
         },
         "commix.GEMINI_API_KEY": {
@@ -153,6 +154,40 @@
           "minimum": 0,
           "maximum": 2,
           "description": "Gemini temperature setting (0-2). Controls randomness."
+        },
+        "commix.NVIDIA_API_KEY": {
+          "type": "string",
+          "default": "",
+          "description": "NVIDIA API Key. Get your key from: https://build.nvidia.com → Sign in → API Keys → Create Key."
+        },
+        "commix.NVIDIA_MODEL": {
+          "type": "string",
+          "default": "meta/llama-3.1-70b-instruct",
+          "description": "Select the NVIDIA-hosted model for AI generation",
+          "enum": [
+            "meta/llama-3.1-70b-instruct",
+            "meta/llama-3.1-8b-instruct",
+            "google/gemma-2-9b-it",
+            "microsoft/phi-3.5-mini-instruct",
+            "nvidia/llava-llama3-8b",
+            "nvidia/nv-embedqa-e5-v5",
+            "qwen2.5-7b-instruct",
+            "qwen2.5-72b-instruct",
+            "deepseek-r1",
+            "deepseek-coder-v2-lite"
+          ],
+          "enumDescriptions": [
+            "LLaMA 3.1 70B — Best quality, strong reasoning, ideal for coding + conversation.",
+            "LLaMA 3.1 8B — Fast, light, cheaper; great for general tasks.",
+            "Gemma 2 9B — High-quality mid-size model with strong creativity and reasoning.",
+            "Phi-3.5 Mini — Ultra-fast and cost-efficient, best for lightweight tasks.",
+            "NVIDIA LLava Vision — Supports image + text inputs for multimodal tasks.",
+            "NVIDIA NV-Embed — Embedding model for semantic search & RAG pipelines.",
+            "Qwen 2.5 7B — Strong coding + reasoning in a compact size.",
+            "Qwen 2.5 72B — Very high accuracy, strong reasoning and code generation.",
+            "DeepSeek R1 — Advanced reasoning model (RL based), great for deep problem solving.",
+            "DeepSeek Coder V2 Lite — Fast, optimized model for code generation."
+          ]
         }
       },
       "title": "CommiX"

@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { createOpenAIApi } from './openai/openai-utils';
-import { createGeminiAPIClient } from './gemini/gemini-utils';
+import { createOpenAIApi } from '../providers/openai/openai-utils';
+import { createGeminiAPIClient } from '../providers/gemini/gemini-utils';
 
 /**
  * Configuration keys used in the CommiX extension.
@@ -8,24 +8,30 @@ import { createGeminiAPIClient } from './gemini/gemini-utils';
  * @property {string} OPENAI_API_KEY - The key for OpenAI API.
  * @property {string} OPENAI_BASE_URL - The base URL for OpenAI API.
  * @property {string} OPENAI_MODEL - The model used for OpenAI.
- * @property {string} AZURE_API_VERSION - The version of Azure API.
- * @property {string} AI_COMMIT_LANGUAGE - The language for CommiX messages.
+ * @property {string} API_VERSION - The version of Azure API.
+ * @property {string} AI_LANGUAGE - The language for CommiX messages.
  * @property {string} SYSTEM_PROMPT - The system prompt for generating commit messages.
  * @property {string} OPENAI_TEMPERATURE - The temperature setting for OpenAI API.
+ * @property {string} NVIDIA_API_KEY - The key for NVIDIA API.
+ * @property {string} NVIDIA_MODEL - The temperature setting for OpenAI API.
  */
 export enum ConfigKeys {
+  AI_LANGUAGE = 'AI_LANGUAGE',
+  SYSTEM_PROMPT = 'SYSTEM_PROMPT',
+  API_VERSION = 'API_VERSION',
+  AI_PROVIDER = 'AI_PROVIDER',
+
   OPENAI_API_KEY = 'OPENAI_API_KEY',
   OPENAI_BASE_URL = 'OPENAI_BASE_URL',
   OPENAI_MODEL = 'OPENAI_MODEL',
-  AZURE_API_VERSION = 'AZURE_API_VERSION',
-  AI_COMMIT_LANGUAGE = 'AI_COMMIT_LANGUAGE',
-  SYSTEM_PROMPT = 'AI_COMMIT_SYSTEM_PROMPT',
   OPENAI_TEMPERATURE = 'OPENAI_TEMPERATURE',
-  
+
   GEMINI_API_KEY = 'GEMINI_API_KEY',
   GEMINI_MODEL = 'GEMINI_MODEL',
   GEMINI_TEMPERATURE = 'GEMINI_TEMPERATURE',
-  AI_PROVIDER = 'AI_PROVIDER',
+
+  NVIDIA_API_KEY = 'NVIDIA_API_KEY',
+  NVIDIA_MODEL = 'NVIDIA_MODEL'
 }
 
 /**
@@ -43,8 +49,10 @@ export class ConfigurationManager {
       if (event.affectsConfiguration('commix')) {
         this.configCache.clear();
 
-        if (event.affectsConfiguration('commix.OPENAI_BASE_URL') ||
-          event.affectsConfiguration('commix.OPENAI_API_KEY')) {
+        if (
+          event.affectsConfiguration('commix.OPENAI_BASE_URL') ||
+          event.affectsConfiguration('commix.OPENAI_API_KEY')
+        ) {
           this.updateOpenAIModelList();
         }
       }
@@ -79,14 +87,17 @@ export class ConfigurationManager {
       const models = await openai.models.list();
 
       // Save available models to extension state
-      await this.context.globalState.update('availableOpenAIModels', models.data.map(model => model.id));
+      await this.context.globalState.update(
+        'availableOpenAIModels',
+        models.data.map((model) => model.id)
+      );
 
       // Get the current selected model
       const config = vscode.workspace.getConfiguration('commix');
       const currentModel = config.get<string>('OPENAI_MODEL');
 
       // If the current selected model is not in the available list, set it to the default value
-      const availableModels = models.data.map(model => model.id);
+      const availableModels = models.data.map((model) => model.id);
       if (!availableModels.includes(currentModel)) {
         await config.update('OPENAI_MODEL', 'gpt-4', vscode.ConfigurationTarget.Global);
       }
@@ -105,6 +116,4 @@ export class ConfigurationManager {
     }
     return this.context.globalState.get<string[]>('availableOpenAIModels', []);
   }
-
- 
 }

@@ -64,7 +64,7 @@ These settings are available under:
 
 | Setting           | Type    | Default                | Required | Description |
 |------------------|---------|------------------------|----------|-------------|
-| `AI_PROVIDER`     | string  | `openai`               | Yes      | Choose: `openai`, `azure`, `gemini`, `deepseek` |
+| `AI_PROVIDER`     | string  | `openai`               | Yes      | Choose: `openai`, `gemini`, `nvidia` |
 | `OPENAI_API_KEY`  | string  | —                      | Yes (if openai) | OpenAI API Key |
 | `OPENAI_MODEL`    | string  | `gpt-4o`               | Yes      | Model used |
 | `GEMINI_API_KEY`  | string  | —                      | Yes (if gemini) | Gemini API Key |
@@ -73,12 +73,94 @@ These settings are available under:
 | `LANGUAGE`        | string  | `en`                   | Yes      | Commit message language |
 | `SYSTEM_PROMPT`   | string  | —                      | No       | Custom system prompt |
 | `ENABLE_GITMOJI`  | boolean | `false`                | No       | Enable Gitmoji |
+| `NVIDIA_API_KEY`  | string  | —                      | Yes (if nvidia) | NVIDIA API Key |
+| `NVIDIA_MODEL`    | string  | `meta/llama-3.1-70b-instruct`               | Yes      | Model used |
 
 ---
 
-## 🔧 Local Development
+## 📘 API Key Setup Guide — CommiX
 
-```bash
-git clone https://github.com/paswans05/commix.git
-cd commix
-npm install
+CommiX works with **OpenAI**, **Google Gemini**, and **NVIDIA NIM**.  
+Follow this guide to generate API keys for each provider.
+
+---
+
+## 🟦 1. OpenAI API Key
+
+**Steps:**
+
+1. Open the OpenAI API dashboard:  
+   👉 https://platform.openai.com/account/api-keys
+2. Sign in to your OpenAI account  
+3. Click **“Create new secret key”**  
+4. Copy the key  
+5. In VS Code:  
+   **Settings → CommiX → OpenAI API Key**
+
+**Recommended Models:**
+
+- `gpt-4o`  
+- `gpt-4o-mini`  
+- `o3-mini`  
+- `o1`
+
+---
+
+## 🟩 2. Google Gemini API Key
+
+**Steps:**
+
+1. Visit Google AI Studio:  
+   👉 https://aistudio.google.com/app/apikey
+2. Sign in with your Google account  
+3. Click **“Create API Key”**  
+4. Copy the key  
+5. In VS Code:  
+   **Settings → CommiX → Gemini API Key**
+
+**Recommended Models:**
+
+- `gemini-2.0-flash-001`
+- `gemini-1.5-flash`
+- `gemini-1.5-pro`
+
+---
+
+## 🟧 3. NVIDIA NIM API Key
+
+**Steps:**
+
+1. Go to NVIDIA Build Platform:  
+   👉 https://build.nvidia.com
+2. Sign in using your NVIDIA or Google account  
+3. Click **API Keys** in the left sidebar  
+4. Press **“Create Key”**  
+5. Copy the key  
+6. In VS Code:  
+   **Settings → CommiX → NVIDIA API Key**
+
+**Recommended Models:**
+
+- `meta/llama-3.1-70b-instruct`
+- `meta/llama-3.1-8b-instruct`
+- `google/gemma-2-9b-it`
+- `deepseek-r1`
+- `deepseek-coder-v2-lite`
+
+---
+
+## 🔒 Security Tips
+
+- Never commit your API keys to GitHub  
+- Use environment variables or VS Code settings only  
+- Rotate keys if exposed  
+- Enable billing only when required  
+
+---
+
+## 📌 Need help?
+
+Open an issue:  
+👉 https://github.com/paswans05/commix/issues
+
+

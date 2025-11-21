@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CommandManager } from './commands';
-import { ConfigurationManager } from './config';
+import { CommandManager } from './commands/commands';
+import { ConfigurationManager } from './configs/config';
 
 /**
  * Activates the extension and registers commands.
@@ -23,11 +23,12 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const apiOpenAIKey = configManager.getConfig<string>('OPENAI_API_KEY');
     const apiGeminiKey = configManager.getConfig<string>('GEMINI_API_KEY');
+    const apiNvidiaKey = configManager.getConfig<string>('NVIDIA_API_KEY');
 
     // Show message only if BOTH keys are empty
-    if (!apiOpenAIKey && !apiGeminiKey) {
+    if (!apiOpenAIKey && !apiGeminiKey && !apiNvidiaKey) {
       const result = await vscode.window.showWarningMessage(
-        'No API keys configured (OpenAI or Gemini). Would you like to configure them now?',
+        'No API keys configured (OpenAI, Gemini and Nvidia). Would you like to configure them now?',
         'Yes',
         'No'
       );
