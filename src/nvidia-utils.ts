@@ -3,18 +3,18 @@ import { ChatCompletionMessageParam } from 'openai/resources';
 import { ConfigKeys, ConfigurationManager } from './config';
 
 /**
- * Creates and returns an OpenAI configuration object.
- * @returns {Object} - The OpenAI configuration object.
+ * Creates and returns an Nvidia configuration object.
+ * @returns {Object} - The Nvidia configuration object.
  * @throws {Error} - Throws an error if the API key is missing or empty.
  */
 function getNvidiaAIConfig() {
   const configManager = ConfigurationManager.getInstance();
-  const apiKey = configManager.getConfig<string>(ConfigKeys.OPENAI_API_KEY);
+  const apiKey = configManager.getConfig<string>(ConfigKeys.NVIDIA_API_KEY);
   const baseURL = "https://integrate.api.nvidia.com/v1";
   const apiVersion = configManager.getConfig<string>(ConfigKeys.API_VERSION);
 
   if (!apiKey) {
-    throw new Error('The OPENAI_API_KEY environment variable is missing or empty.');
+    throw new Error('The NVIDIA_API_KEY environment variable is missing or empty.');
   }
 
   const config: {
@@ -38,7 +38,7 @@ function getNvidiaAIConfig() {
 }
 
 /**
- * Creates and returns an OpenAI API instance.
+ * Creates and returns an Nvidia API instance.
  * @returns {OpenAI} - The OpenAI API instance.
  */
 export function createNvidiaAIApi() {
