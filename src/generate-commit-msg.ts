@@ -1,13 +1,13 @@
 import * as fs from 'fs-extra';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import * as vscode from 'vscode';
-import { ConfigKeys, ConfigurationManager } from '../configs/config';
-import { getDiffStaged } from '../utils/git-utils';
-import { ChatGPTAPI } from '../providers/openai/openai-utils';
-import { getMainCommitPrompt } from '../prompts/prompts';
-import { ProgressHandler } from '../utils/utils';
-import { GeminiAPI } from '../providers/gemini/gemini-utils';
-import { NvidiaAPI } from '../providers/nvidia/nvidia-utils';
+import { ConfigKeys, ConfigurationManager } from './config';
+import { getDiffStaged } from './git-utils';
+import { ChatGPTAPI } from './openai-utils';
+import { getMainCommitPrompt } from './prompts';
+import { ProgressHandler } from './utils';
+import { GeminiAPI } from './gemini-utils';
+import { NvidiaAPI } from './nvidia-utils';
 
 /**
  * Generates a chat completion prompt for the commit message based on the provided diff.

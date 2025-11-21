@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { generateCommitMsg } from '../gen/generate-commit-msg';
-import { ConfigurationManager } from '../configs/config';
+import { generateCommitMsg } from './generate-commit-msg';
+import { ConfigurationManager } from './config';
 
 /**
  * Manages the registration and disposal of commands.

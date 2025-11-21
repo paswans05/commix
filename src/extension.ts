@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import { CommandManager } from './commands/commands';
-import { ConfigurationManager } from './configs/config';
+import { CommandManager } from './commands';
+import { ConfigurationManager } from './config';
 
 /**
  * Activates the extension and registers commands.
