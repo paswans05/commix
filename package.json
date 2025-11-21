@@ -2,7 +2,7 @@
   "name": "commix",
   "displayName": "CommiX",
   "description": "Use OpenAI, Gemini, or Nvidia APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "engines": {
     "node": ">=16",
     "vscode": "^1.106.2"
