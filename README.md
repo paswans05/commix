@@ -18,6 +18,8 @@ CommiX reviews your Git changes and generates clean, conventional commit message
 ![Issues](https://img.shields.io/github/issues/paswans05/commix?style=flat-square&labelColor=000)
 ![License](https://img.shields.io/github/license/paswans05/commix?style=flat-square&labelColor=000)
 
+![](https://github.com/paswans05/commix/blob/main/assets/gif/commix-details?raw=true)
+
 </div>
 
 ---
