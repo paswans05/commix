@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import { CommandManager } from './commands';
 import { ConfigurationManager } from './config';
+import { SidebarProvider } from './sidebar/SidebarProvider';
+import { StatusBarManager } from './status-bar';
 
 /**
  * Activates the extension and registers commands.
@@ -13,6 +15,16 @@ export async function activate(context: vscode.ExtensionContext) {
 
     const commandManager = new CommandManager(context);
     commandManager.registerCommands();
+
+    const sidebarProvider = new SidebarProvider(context.extensionUri);
+    context.subscriptions.push(
+      vscode.window.registerWebviewViewProvider(
+        "commix.sidebarView",
+        sidebarProvider
+      )
+    );
+
+    const statusBarManager = new StatusBarManager(context);
 
     context.subscriptions.push({
       dispose: () => {

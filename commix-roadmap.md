@@ -12,13 +12,13 @@ CommiX is growing fast. Here’s the official roadmap outlining what’s coming 
 - [ ] Commit history improvements  
 
 ## ✅ **Phase 2 — Core (MVP)**
-- [ ] AI Edit (Improve, Fix, Optimize)  
-- [ ] AI Explain Code  
-- [ ] Selection-based actions  
-- [ ] Sidebar Panel (CommiX View)  
-- [ ] Status Bar Toggle (⚡ ON / OFF)  
-- [ ] Settings Page (API Key, Model Select)  
-- [ ] Terminal Icon Support (left sidebar integration)
+- [x] AI Edit (Improve, Fix, Optimize)  
+- [x] AI Explain Code  
+- [x] Selection-based actions  
+- [x] Sidebar Panel (CommiX View)  
+- [x] Status Bar Toggle (⚡ ON / OFF)  
+- [x] Settings Page (API Key, Model Select)  
+- [x] Terminal Icon Support (left sidebar integration)
 
 
 ## 🎯 **Phase 3 — AI Edit Mode (Signature Feature)**

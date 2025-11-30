@@ -1,6 +1,8 @@
 import * as vscode from 'vscode';
 import { generateCommitMsg } from './generate-commit-msg';
 import { ConfigurationManager } from './config';
+import { aiEdit } from './ai-features/edit';
+import { aiExplain } from './ai-features/explain';
 
 /**
  * Manages the registration and disposal of commands.
@@ -30,6 +32,8 @@ export class CommandManager {
       }
     });
 
+    this.registerCommand('commix.aiEdit', aiEdit);
+    this.registerCommand('commix.aiExplain', aiExplain);
   
   }
 

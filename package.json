@@ -47,6 +47,14 @@
       {
         "command": "commix.showAvailableModels",
         "title": "Show Available OpenAI Models"
+      },
+      {
+        "command": "commix.aiEdit",
+        "title": "CommiX: $(edit) AI Edit / Refactor"
+      },
+      {
+        "command": "commix.aiExplain",
+        "title": "CommiX: $(output) Explain Code"
       }
     ],
     "configuration": {
@@ -197,6 +205,37 @@
         {
           "command": "extension.commix",
           "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "commix.aiEdit",
+          "group": "commix-group@1",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "commix.aiExplain",
+          "group": "commix-group@2",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "commix-sidebar",
+          "title": "CommiX",
+          "icon": "assets/images/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "commix-sidebar": [
+        {
+          "type": "webview",
+          "id": "commix.sidebarView",
+          "icon": "assets/images/icon.svg",
+          "name": "CommiX"
         }
       ]
     }
