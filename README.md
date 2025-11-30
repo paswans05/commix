@@ -56,6 +56,17 @@ Search for **“CommiX”** → Click **Install**
 6. Review & commit
 
 > 💡 If the diff is too large, stage files in smaller batches.
+ 
+---
+
+## 🛠️ AI Edit & Refactor
+
+CommiX now supports **AI-powered code editing and refactoring**.
+
+1. Select the code you want to modify in the editor.
+2. Right-click and choose **"CommiX: $(edit) AI Edit / Refactor"**.
+3. Enter your instruction (e.g., *"Refactor this function to be async"*, *"Add error handling"*, *"Optimize for performance"*).
+4. CommiX will process your request and update the code automatically.
 
 ---
 
