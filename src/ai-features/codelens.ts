@@ -36,7 +36,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
                 if (range) {
                     // AI Edit Command
                     const editCmd: vscode.Command = {
-                        title: "$(edit) CommiX Edit ",
+                        title: "$(edit) CommiX Edit",
                         tooltip: "Edit this code with AI using CommiX",
                         command: "commix.aiEdit",
                         arguments: [range]
