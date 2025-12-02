@@ -3,6 +3,22 @@ All notable changes to **CommiX** will be documented in this file.
 
 ---
 
+## [2.0.0] - 2025-11-30
+
+### 🚀 Major Features (Phase 2 Core)
+- **AI Edit & Refactor**: Modify code with natural language instructions (`CommiX: AI Edit / Refactor`).
+- **AI Explain Code**: Get instant explanations for selected code (`CommiX: Explain Code`).
+- **CommiX Sidebar**: New dedicated view in the Activity Bar.
+- **Status Bar Integration**: Toggle CommiX on/off directly from the status bar.
+- **Editor Context Menu**: Access AI features via right-click on selected text.
+
+### ✨ Added
+- Added `$(edit)` icon to AI Edit command.
+- Added `$(output)` icon to AI Explain command.
+- Added `editor/title` menu support for quick access (currently disabled/reverted based on user preference).
+
+---
+
 ## [1.0.0] - 2025-11-21
 
 ### ✨ Added
