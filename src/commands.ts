@@ -3,6 +3,7 @@ import { generateCommitMsg } from './generate-commit-msg';
 import { ConfigurationManager } from './config';
 import { aiEdit } from './ai-features/edit';
 import { aiExplain } from './ai-features/explain';
+import { aiConvert } from './ai-features/convert';
 
 /**
  * Manages the registration and disposal of commands.
@@ -34,6 +35,7 @@ export class CommandManager {
 
     this.registerCommand('commix.aiEdit', aiEdit);
     this.registerCommand('commix.aiExplain', aiExplain);
+    this.registerCommand('commix.aiConvert', aiConvert);
   
   }
 

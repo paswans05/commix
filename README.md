@@ -6,8 +6,9 @@
 
 <h1>CommiX</h1>
 
-AI-powered commit message generator for VS Code.  
-CommiX reviews your Git changes and generates clean, conventional commit messages using OpenAI / Gemini / DeepSeek models — keeping your commits consistent and effortless.
+AI-powered commit message generator & coding assistant for VS Code.  
+CommiX reviews your Git changes and generates clean, conventional commit messages.  
+**Now with v2.0 & v3.0**: Empower your workflow with **AI Edit**, **Refactor**, **Explain**, and **Convert** tools, featuring **CodeLens**, **Inline Suggestions**, and **Diff-based Previews** — all powered by OpenAI, Gemini, and NVIDIA.
 
 **English** · [Report Bug](https://github.com/paswans05/commix/issues) · [Request Feature](https://github.com/paswans05/commix/issues)
 
@@ -67,6 +68,17 @@ CommiX now supports **AI-powered code editing and refactoring**.
 2. Right-click and choose **"CommiX: $(edit) AI Edit / Refactor"**.
 3. Enter your instruction (e.g., *"Refactor this function to be async"*, *"Add error handling"*, *"Optimize for performance"*).
 4. CommiX will process your request and update the code automatically.
+
+---
+
+### 🚀 New in v3.0: AI Edit Mode
+CommiX v3.0 introduces a powerful set of AI editing tools:
+
+- **Function-level Icons (CodeLens)**: "AI Edit" and "AI Explain" buttons appear directly above functions/classes.
+- **Inline Suggestions**: Click the lightbulb 💡 icon on selected code to access AI actions.
+- **Convert Code**: Easily convert code between languages (e.g., JS → TS) via `CommiX: Convert Code`.
+- **Diff-based Preview**: All AI edits now open in a **Diff View**, letting you review changes safely before applying.
+- **Smart Patch**: Apply AI suggestions with a single click from the diff view.
 
 ---
 

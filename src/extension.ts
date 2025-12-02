@@ -3,6 +3,8 @@ import { CommandManager } from './commands';
 import { ConfigurationManager } from './config';
 import { SidebarProvider } from './sidebar/SidebarProvider';
 import { StatusBarManager } from './status-bar';
+import { CodelensProvider } from './ai-features/codelens';
+import { AIActionProvider } from './ai-features/code-actions';
 
 /**
  * Activates the extension and registers commands.
@@ -25,6 +27,20 @@ export async function activate(context: vscode.ExtensionContext) {
     );
 
     const statusBarManager = new StatusBarManager(context);
+
+    // Register CodeLens Provider
+    const codelensProvider = new CodelensProvider();
+    context.subscriptions.push(
+        vscode.languages.registerCodeLensProvider("*", codelensProvider)
+    );
+
+    // Register CodeAction Provider
+    const actionProvider = new AIActionProvider();
+    context.subscriptions.push(
+        vscode.languages.registerCodeActionsProvider("*", actionProvider, {
+            providedCodeActionKinds: AIActionProvider.providedCodeActionKinds
+        })
+    );
 
     context.subscriptions.push({
       dispose: () => {

@@ -22,12 +22,12 @@ CommiX is growing fast. Here’s the official roadmap outlining what’s coming 
 
 
 ## 🎯 **Phase 3 — AI Edit Mode (Signature Feature)**
-- [ ] Function-level icons  
-- [ ] Improve / Fix / Refactor / Document buttons  
-- [ ] Convert code (JS → TS, JS → Python, etc.)  
-- [ ] Diff-based preview  
-- [ ] Inline transformation suggestions  
-- [ ] Smart patch apply  
+- [x] Function-level icons  
+- [x] Improve / Fix / Refactor / Document buttons  
+- [x] Convert code (JS → TS, JS → Python, etc.)  
+- [x] Diff-based preview  
+- [x] Inline transformation suggestions  
+- [x] Smart patch apply  
 
 ## ⚙️ **Phase 4 — Model Engine Upgrade**
 - [ ] OpenAI models  

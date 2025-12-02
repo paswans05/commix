@@ -3,6 +3,24 @@ All notable changes to **CommiX** will be documented in this file.
 
 ---
 
+## [3.0.0] - 2025-12-02
+
+### 🚀 Major Features (Phase 3 AI Edit Mode)
+- **Function-level Icons (CodeLens)**: "AI Edit" and "AI Explain" buttons now appear directly above functions and classes for quick access.
+- **Inline Transformation Suggestions**: Lightbulb code actions for "AI Edit", "Explain Code", and "Convert Code".
+- **Convert Code Command**: Easily convert code between languages (e.g., JS to TS, Python to Go) using `CommiX: Convert Code`.
+- **Diff-based Preview**: AI edits now open in a diff view, allowing you to review changes before applying them.
+- **Smart Patch Apply**: Apply changes from the diff view with a single click.
+- **Enhanced AI Edit**: Added quick options for "Improve", "Fix", "Refactor", and "Document" when using AI Edit.
+
+### ✨ Added
+- Added `commix.enableCodeLens` setting to toggle function-level icons.
+- Added `commix.aiConvert` command.
+- Added `CodeActionProvider` for inline suggestions.
+- Added `DiffViewManager` for handling AI suggestions safely.
+
+---
+
 ## [2.0.0] - 2025-11-30
 
 ### 🚀 Major Features (Phase 2 Core)

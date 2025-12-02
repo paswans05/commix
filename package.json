@@ -1,7 +1,7 @@
 {
   "name": "commix",
   "displayName": "CommiX",
-  "description": "Use OpenAI, Gemini, or Nvidia APIs to analyze Git changes and generate clean, consistent conventional commit messages — making your commit process faster, smarter, and always on standard.",
+  "description": "AI-powered commit message generator & coding assistant. Now with v2.0 & v3.0: AI Edit, Refactor, Explain, and Convert tools, featuring CodeLens, Inline Suggestions, and Diff-based Previews — powered by OpenAI, Gemini, and NVIDIA.",
   "version": "2.0.0",
   "engines": {
     "node": ">=16",
@@ -55,10 +55,19 @@
       {
         "command": "commix.aiExplain",
         "title": "CommiX: $(output) Explain Code"
+      },
+      {
+        "command": "commix.aiConvert",
+        "title": "CommiX: $(sync) Convert Code"
       }
     ],
     "configuration": {
       "properties": {
+        "commix.enableCodeLens": {
+            "type": "boolean",
+            "default": true,
+            "description": "Enable/Disable CodeLens (AI Edit/Explain icons above functions)"
+        },
         "commix.AI_LANGUAGE": {
           "default": "English",
           "description": "Commit message language",
@@ -216,6 +225,11 @@
         {
           "command": "commix.aiExplain",
           "group": "commix-group@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "commix.aiConvert",
+          "group": "commix-group@3",
           "when": "editorHasSelection"
         }
       ]
