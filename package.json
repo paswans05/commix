@@ -2,7 +2,7 @@
   "name": "commix",
   "displayName": "CommiX",
   "description": "AI-powered commit message generator & coding assistant. Now with v2.0 & v3.0: AI Edit, Refactor, Explain, and Convert tools, featuring CodeLens, Inline Suggestions, and Diff-based Previews — powered by OpenAI, Gemini, and NVIDIA.",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "engines": {
     "node": ">=16",
     "vscode": "^1.106.2"
@@ -64,9 +64,9 @@
     "configuration": {
       "properties": {
         "commix.enableCodeLens": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable/Disable CodeLens (AI Edit/Explain icons above functions)"
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/Disable CodeLens (AI Edit/Explain icons above functions)"
         },
         "commix.AI_LANGUAGE": {
           "default": "English",
