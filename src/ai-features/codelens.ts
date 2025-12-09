@@ -40,7 +40,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
         if (range) {
           // AI Edit Command
           const editCmd: vscode.Command = {
-            title: '$(edit) Edit',
+            title: '$(edit) AI Edit',
             tooltip: 'Edit this code with AI using CommiX',
             command: 'commix.aiEdit',
             arguments: [range]
@@ -49,7 +49,7 @@ export class CodelensProvider implements vscode.CodeLensProvider {
 
           // AI Explain Command
           const explainCmd: vscode.Command = {
-            title: '$(output) Explain',
+            title: '$(output) AI Explain',
             tooltip: 'Explain this code with AI using CommiX',
             command: 'commix.aiExplain',
             arguments: [range]
