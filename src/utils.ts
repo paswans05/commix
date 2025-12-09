@@ -20,3 +20,20 @@ export class ProgressHandler {
     );
   }
 }
+
+export class Logger {
+  private static _outputChannel: vscode.OutputChannel;
+
+  public static get outputChannel(): vscode.OutputChannel {
+    if (!this._outputChannel) {
+      this._outputChannel = vscode.window.createOutputChannel('CommiX');
+    }
+    return this._outputChannel;
+  }
+
+  public static log(message: string) {
+    // Show the channel when logging
+    // this.outputChannel.show(true);
+    this.outputChannel.appendLine(`[${new Date().toLocaleTimeString()}] ${message}`);
+  }
+}

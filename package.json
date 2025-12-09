@@ -152,7 +152,9 @@
           "enum": [
             "openai",
             "gemini",
-            "nvidia"
+            "nvidia",
+            "groq",
+            "ollama"
           ]
         },
         "commix.GEMINI_API_KEY": {
@@ -205,6 +207,26 @@
             "DeepSeek R1 — Advanced reasoning model (RL based), great for deep problem solving.",
             "DeepSeek Coder V2 Lite — Fast, optimized model for code generation."
           ]
+        },
+        "commix.GROQ_API_KEY": {
+          "type": "string",
+          "default": "",
+          "description": "Groq API Key"
+        },
+        "commix.GROQ_MODEL": {
+          "type": "string",
+          "default": "llama3-70b-8192",
+          "description": "Groq Model to use (e.g., llama3-70b-8192, mixtral-8x7b-32768)"
+        },
+        "commix.OLLAMA_BASE_URL": {
+          "type": "string",
+          "default": "http://localhost:11434",
+          "description": "Base URL for Ollama (e.g., http://localhost:11434)"
+        },
+        "commix.OLLAMA_MODEL": {
+          "type": "string",
+          "default": "llama3",
+          "description": "Ollama Model to use (e.g., llama3, mistral, phi)"
         }
       },
       "title": "CommiX"

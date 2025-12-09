@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import { createOpenAIApi } from './openai-utils';
-import { createGeminiAPIClient } from './gemini-utils';
 
 /**
  * Configuration keys used in the CommiX extension.
@@ -31,7 +30,13 @@ export enum ConfigKeys {
   GEMINI_TEMPERATURE = 'GEMINI_TEMPERATURE',
 
   NVIDIA_API_KEY = 'NVIDIA_API_KEY',
-  NVIDIA_MODEL = 'NVIDIA_MODEL'
+  NVIDIA_MODEL = 'NVIDIA_MODEL',
+
+  GROQ_API_KEY = 'GROQ_API_KEY',
+  GROQ_MODEL = 'GROQ_MODEL',
+
+  OLLAMA_BASE_URL = 'OLLAMA_BASE_URL',
+  OLLAMA_MODEL = 'OLLAMA_MODEL'
 }
 
 /**

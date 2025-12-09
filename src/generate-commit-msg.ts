@@ -3,12 +3,8 @@ import { ChatCompletionMessageParam } from 'openai/resources';
 import * as vscode from 'vscode';
 import { ConfigKeys, ConfigurationManager } from './config';
 import { getDiffStaged } from './git-utils';
-import { ChatGPTAPI } from './openai-utils';
 import { getMainCommitPrompt } from './prompts';
 import { ProgressHandler } from './utils';
-import { GeminiAPI } from './gemini-utils';
-import { NvidiaAPI } from './nvidia-utils';
-
 /**
  * Generates a chat completion prompt for the commit message based on the provided diff.
  *
@@ -115,33 +111,21 @@ export async function generateCommitMsg(arg) {
       try {
         let commitMessage: string | undefined;
 
-        if (aiProvider === 'gemini') {
-          const geminiApiKey = configManager.getConfig<string>(
-            ConfigKeys.GEMINI_API_KEY
-          );
-          if (!geminiApiKey) {
-            throw new Error('Gemini API Key not configured');
+        if (aiProvider === 'ollama') {
+          const { OllamaProvider } = await import('./providers/ollama');
+          const isAvailable = await OllamaProvider.isAvailable();
+          if (!isAvailable) {
+            throw new Error(
+              'Ollama service is not reachable. Please ensure Ollama is running (default: http://localhost:11434).'
+            );
           }
-          commitMessage = await GeminiAPI(messages);
-        } else if (aiProvider === 'nvidia') {
-          const nvidiaApiKey = configManager.getConfig<string>(
-            ConfigKeys.NVIDIA_API_KEY
-          );
-          if (!nvidiaApiKey) {
-            throw new Error('NVIDIA API Key not configured');
-          }
-          commitMessage = await NvidiaAPI(messages as ChatCompletionMessageParam[]);
-        } else if (aiProvider === 'openai') {
-          const openaiApiKey = configManager.getConfig<string>(
-            ConfigKeys.OPENAI_API_KEY
-          );
-          if (!openaiApiKey) {
-            throw new Error('OpenAI API Key not configured');
-          }
-          commitMessage = await ChatGPTAPI(messages as ChatCompletionMessageParam[]);
-        } else {
-          throw new Error('OpenAI API Key not configured');
         }
+
+        const { ProviderFactory } = await import('./providers/factory');
+        const provider = ProviderFactory.getProvider();
+        commitMessage = await provider.generateCommitMessage(
+          messages as ChatCompletionMessageParam[]
+        );
 
         if (commitMessage) {
           scmInputBox.value = commitMessage;
@@ -150,39 +134,28 @@ export async function generateCommitMsg(arg) {
         }
       } catch (err) {
         let errorMessage = 'An unexpected error occurred';
+        const providerName = aiProvider || 'Unknown Provider';
 
-        if (aiProvider === 'openai' && err.response?.status) {
+        if (err.response?.status) {
+          // OpenAI-compatible error handling
           switch (err.response.status) {
             case 401:
-              errorMessage = 'Invalid OpenAI API key or unauthorized access';
+              errorMessage = `Invalid ${providerName} API key or unauthorized access`;
               break;
             case 429:
-              errorMessage = 'Rate limit exceeded. Please try again later';
+              errorMessage = `${providerName} rate limit exceeded. Please try again later`;
               break;
             case 500:
-              errorMessage = 'OpenAI server error. Please try again later';
+              errorMessage = `${providerName} server error. Please try again later`;
               break;
             case 503:
-              errorMessage = 'OpenAI service is temporarily unavailable';
+              errorMessage = `${providerName} service is temporarily unavailable`;
               break;
+            default:
+              errorMessage = `${providerName} API error: ${err.message}`;
           }
-        } else if (aiProvider === 'nvidia' && err.response?.status) {
-          switch (err.response.status) {
-            case 401:
-              errorMessage = 'Invalid NVIDIA API key or unauthorized access';
-              break;
-            case 429:
-              errorMessage = 'Rate limit exceeded. Please try again later';
-              break;
-            case 500:
-              errorMessage = 'NVIDIA server error. Please try again later';
-              break;
-            case 503:
-              errorMessage = 'NVIDIA service is temporarily unavailable';
-              break;
-          }
-        } else if (aiProvider === 'gemini') {
-          errorMessage = `Gemini API error: ${err.message}`;
+        } else if (err.message) {
+          errorMessage = err.message;
         }
 
         throw new Error(errorMessage);

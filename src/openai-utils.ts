@@ -45,23 +45,3 @@ export function createOpenAIApi() {
   const config = getOpenAIConfig();
   return new OpenAI(config);
 }
-
-/**
- * Sends a chat completion request to the OpenAI API.
- * @param {Array<Object>} messages - The messages to send to the API.
- * @returns {Promise<string>} - A promise that resolves to the API response.
- */
-export async function ChatGPTAPI(messages: ChatCompletionMessageParam[]) {
-  const openai = createOpenAIApi();
-  const configManager = ConfigurationManager.getInstance();
-  const model = configManager.getConfig<string>(ConfigKeys.OPENAI_MODEL);
-  const temperature = configManager.getConfig<number>(ConfigKeys.OPENAI_TEMPERATURE, 0.7);
-
-  const completion = await openai.chat.completions.create({
-    model,
-    messages: messages as ChatCompletionMessageParam[],
-    temperature
-  });
-
-  return completion.choices[0]!.message?.content;
-}
