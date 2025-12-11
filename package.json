@@ -2,7 +2,7 @@
   "name": "commix",
   "displayName": "CommiX",
   "description": "AI-powered commit message generator & coding assistant. AI Edit, Refactor, Explain, and Convert tools, featuring CodeLens, Inline Suggestions, and Diff-based Previews — powered by OpenAI, Gemini, and NVIDIA.",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "engines": {
     "node": ">=16",
     "vscode": "^1.106.2"
