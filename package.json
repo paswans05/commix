@@ -1,7 +1,7 @@
 {
   "name": "commix",
   "displayName": "CommiX",
-  "description": "AI-powered commit message generator & coding assistant. Now with v2.0 & v3.0: AI Edit, Refactor, Explain, and Convert tools, featuring CodeLens, Inline Suggestions, and Diff-based Previews — powered by OpenAI, Gemini, and NVIDIA.",
+  "description": "AI-powered commit message generator & coding assistant. AI Edit, Refactor, Explain, and Convert tools, featuring CodeLens, Inline Suggestions, and Diff-based Previews — powered by OpenAI, Gemini, and NVIDIA.",
   "version": "4.0.0",
   "engines": {
     "node": ">=16",
@@ -59,6 +59,18 @@
       {
         "command": "commix.aiConvert",
         "title": "CommiX: $(sync) Convert Code"
+      },
+      {
+        "command": "commix.aiSnippet",
+        "title": "CommiX: $(code) Generate Snippet"
+      },
+      {
+        "command": "commix.aiTest",
+        "title": "CommiX: $(beaker) Generate Test"
+      },
+      {
+        "command": "commix.aiDoc",
+        "title": "CommiX: $(book) Generate Documentation"
       }
     ],
     "configuration": {

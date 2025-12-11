@@ -4,6 +4,9 @@ import { ConfigurationManager } from './config';
 import { aiEdit } from './ai-features/edit';
 import { aiExplain } from './ai-features/explain';
 import { aiConvert } from './ai-features/convert';
+import { aiSnippet } from './ai-features/snippet';
+import { aiTest } from './ai-features/test-generator';
+import { aiDoc } from './ai-features/doc-generator';
 
 /**
  * Manages the registration and disposal of commands.
@@ -26,17 +29,23 @@ export class CommandManager {
       const selected = await vscode.window.showQuickPick(models, {
         placeHolder: 'Please select a model'
       });
-      
+
       if (selected) {
         const config = vscode.workspace.getConfiguration('commix');
-        await config.update('OPENAI_MODEL', selected, vscode.ConfigurationTarget.Global);
+        await config.update(
+          'OPENAI_MODEL',
+          selected,
+          vscode.ConfigurationTarget.Global
+        );
       }
     });
 
     this.registerCommand('commix.aiEdit', aiEdit);
     this.registerCommand('commix.aiExplain', aiExplain);
     this.registerCommand('commix.aiConvert', aiConvert);
-  
+    this.registerCommand('commix.aiSnippet', aiSnippet);
+    this.registerCommand('commix.aiTest', aiTest);
+    this.registerCommand('commix.aiDoc', aiDoc);
   }
 
   private registerCommand(command: string, handler: (...args: any[]) => any) {
