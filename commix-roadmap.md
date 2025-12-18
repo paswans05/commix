@@ -43,12 +43,12 @@ CommiX is growing fast. Here’s the official roadmap outlining what’s coming 
 
 ## 🎨 **Phase 5 — CommiX Studio**
 
-- [ ] AI Snippet Generator
-- [ ] AI Test Generator
-- [ ] AI Documentation Builder
-- [ ] Workflow Builder
-- [ ] Custom prompt presets
-- [ ] Template system
+- [x] AI Snippet Generator
+- [x] AI Test Generator
+- [x] AI Documentation Builder
+- [x] Workflow Builder
+- [x] Custom prompt presets
+- [x] Template system
 
 ## 🌐 **Phase 6 — Cloud Sync**
 

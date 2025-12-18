@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ProviderFactory } from '../providers/factory';
 import { ChatCompletionMessageParam } from 'openai/resources';
+import { ConfigKeys, ConfigurationManager } from '../config';
 
 export async function aiSnippet() {
   try {
@@ -24,12 +25,18 @@ export async function aiSnippet() {
 
     // Get language context
     const languageId = editor.document.languageId;
+    const configManager = ConfigurationManager.getInstance();
+    const customPrompt = configManager.getConfig<string>(ConfigKeys.PROMPT_SNIPPET);
 
     // Build messages for AI provider
+    const systemPrompt =
+      customPrompt ||
+      `You are a code snippet generator. Generate clean, production-ready code snippets based on user descriptions. Only return the code, no explanations or markdown formatting.`;
+
     const messages: ChatCompletionMessageParam[] = [
       {
         role: 'system',
-        content: `You are a code snippet generator. Generate clean, production-ready code snippets based on user descriptions. Only return the code, no explanations or markdown formatting.`
+        content: systemPrompt
       },
       {
         role: 'user',

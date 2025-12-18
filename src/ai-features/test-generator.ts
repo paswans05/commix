@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ProviderFactory } from '../providers/factory';
 import { ChatCompletionMessageParam } from 'openai/resources';
+import { ConfigKeys, ConfigurationManager } from '../config';
 
 export async function aiTest() {
   try {
@@ -36,11 +37,18 @@ export async function aiTest() {
       testFramework = 'JUnit';
     }
 
+    const configManager = ConfigurationManager.getInstance();
+    const customPrompt = configManager.getConfig<string>(ConfigKeys.PROMPT_TEST);
+
     // Build messages for AI provider
+    const systemPrompt =
+      customPrompt ||
+      `You are a test generation expert. Generate comprehensive unit tests using ${testFramework}. Include edge cases and proper assertions. Only return the test code, no explanations.`;
+
     const messages: ChatCompletionMessageParam[] = [
       {
         role: 'system',
-        content: `You are a test generation expert. Generate comprehensive unit tests using ${testFramework}. Include edge cases and proper assertions. Only return the test code, no explanations.`
+        content: systemPrompt
       },
       {
         role: 'user',

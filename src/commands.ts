@@ -7,6 +7,8 @@ import { aiConvert } from './ai-features/convert';
 import { aiSnippet } from './ai-features/snippet';
 import { aiTest } from './ai-features/test-generator';
 import { aiDoc } from './ai-features/doc-generator';
+import { aiWorkflow } from './ai-features/workflow';
+import { saveTemplate, insertTemplate } from './ai-features/templates';
 
 /**
  * Manages the registration and disposal of commands.
@@ -46,6 +48,9 @@ export class CommandManager {
     this.registerCommand('commix.aiSnippet', aiSnippet);
     this.registerCommand('commix.aiTest', aiTest);
     this.registerCommand('commix.aiDoc', aiDoc);
+    this.registerCommand('commix.aiWorkflow', aiWorkflow);
+    this.registerCommand('commix.saveTemplate', saveTemplate);
+    this.registerCommand('commix.insertTemplate', insertTemplate);
   }
 
   private registerCommand(command: string, handler: (...args: any[]) => any) {

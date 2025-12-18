@@ -71,6 +71,18 @@
       {
         "command": "commix.aiDoc",
         "title": "CommiX: $(book) Generate Documentation"
+      },
+      {
+        "command": "commix.aiWorkflow",
+        "title": "CommiX: $(list-ordered) Run AI Workflow"
+      },
+      {
+        "command": "commix.saveTemplate",
+        "title": "CommiX: $(save) Save as Template"
+      },
+      {
+        "command": "commix.insertTemplate",
+        "title": "CommiX: $(layout) Insert Template"
       }
     ],
     "configuration": {
@@ -144,6 +156,21 @@
           "default": "gpt-4o",
           "description": "OpenAI MODEL, you can select a model from the list by running the 'Show Available OpenAI Models' command",
           "type": "string"
+        },
+        "commix.PROMPT_SNIPPET": {
+          "type": "string",
+          "default": "",
+          "description": "Custom system prompt for AI Snippet Generator"
+        },
+        "commix.PROMPT_TEST": {
+          "type": "string",
+          "default": "",
+          "description": "Custom system prompt for AI Test Generator"
+        },
+        "commix.PROMPT_DOC": {
+          "type": "string",
+          "default": "",
+          "description": "Custom system prompt for AI Documentation Builder"
         },
         "commix.SYSTEM_PROMPT": {
           "type": "string",

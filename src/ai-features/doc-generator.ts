@@ -1,6 +1,7 @@
 import * as vscode from 'vscode';
 import { ProviderFactory } from '../providers/factory';
 import { ChatCompletionMessageParam } from 'openai/resources';
+import { ConfigKeys, ConfigurationManager } from '../config';
 
 export async function aiDoc() {
   try {
@@ -33,8 +34,13 @@ export async function aiDoc() {
       ignoreFocusOut: true
     });
 
+    const configManager = ConfigurationManager.getInstance();
+    const customPrompt = configManager.getConfig<string>(ConfigKeys.PROMPT_DOC);
+
     // Build messages for AI provider
-    const systemPrompt = `You are a technical documentation expert. Generate comprehensive, well-structured markdown documentation for the provided code. Include:
+    const systemPrompt =
+      customPrompt ||
+      `You are a technical documentation expert. Generate comprehensive, well-structured markdown documentation for the provided code. Include:
 - Overview/Purpose
 - Parameters/Arguments
 - Return values

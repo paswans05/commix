@@ -37,6 +37,24 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           vscode.window.showErrorMessage(data.value);
           break;
         }
+        case 'command': {
+          const commandMap: Record<string, string> = {
+            generate: 'extension.commix',
+            edit: 'commix.aiEdit',
+            explain: 'commix.aiExplain',
+            snippet: 'commix.aiSnippet',
+            test: 'commix.aiTest',
+            doc: 'commix.aiDoc',
+            workflow: 'commix.aiWorkflow',
+            saveTemplate: 'commix.saveTemplate',
+            insertTemplate: 'commix.insertTemplate'
+          };
+          const cmd = commandMap[data.value];
+          if (cmd) {
+            vscode.commands.executeCommand(cmd);
+          }
+          break;
+        }
       }
     });
   }
@@ -253,6 +271,45 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                         <button class="button secondary" onclick="sendMessage('explain')">
                             Explain Code
                         </button>
+                    </div>
+
+                    <div style="margin: 25px 0 15px; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; opacity: 0.7; border-bottom: 1px solid var(--vscode-widget-border); padding-bottom: 5px;">
+                        CommiX Studio
+                    </div>
+
+                    <!-- Studio Tools -->
+                    <div class="card">
+                        <div class="card-title">📝 Snippet & Docs</div>
+                        <div class="card-desc">Generate code snippets or technical documentation instantly.</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="button secondary" onclick="sendMessage('snippet')" style="flex: 1;">Snippet</button>
+                            <button class="button secondary" onclick="sendMessage('doc')" style="flex: 1;">Docs</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">🧪 Test Lab</div>
+                        <div class="card-desc">Create unit tests for your functions with edge case coverage.</div>
+                        <button class="button secondary" onclick="sendMessage('test')">
+                            Generate Tests
+                        </button>
+                    </div>
+
+                    <div class="card" style="border: 1px dashed var(--vscode-button-background); background: rgba(var(--vscode-button-background-rgb), 0.05);">
+                        <div class="card-title">⚡ AI Workflow</div>
+                        <div class="card-desc">Chain multiple AI actions together into a single automated pipeline.</div>
+                        <button class="button" onclick="sendMessage('workflow')">
+                            Run Studio Workflow
+                        </button>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-title">📦 Template System</div>
+                        <div class="card-desc">Save your best generated code as templates for future use.</div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="button secondary" onclick="sendMessage('saveTemplate')" style="flex: 1;">Save</button>
+                            <button class="button secondary" onclick="sendMessage('insertTemplate')" style="flex: 1;">Insert</button>
+                        </div>
                     </div>
                 </div>
 
