@@ -28,8 +28,7 @@ export class GeminiProvider implements AIProvider {
       const gemini = this.createGeminiAPIClient();
       const configManager = ConfigurationManager.getInstance();
       const modelName =
-        configManager.getConfig<string>(ConfigKeys.GEMINI_MODEL) ||
-        'gemini-2.0-flash-001';
+        configManager.getConfig<string>(ConfigKeys.GEMINI_MODEL) || 'gemini-1.5-flash';
       const temperature = configManager.getConfig<number>(
         ConfigKeys.GEMINI_TEMPERATURE,
         0.7
