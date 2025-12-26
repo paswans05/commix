@@ -203,19 +203,21 @@
         },
         "commix.GEMINI_MODEL": {
           "type": "string",
-          "default": "gemini-1.5-flash",
+          "default": "gemini-2.5-flash",
           "description": "Gemini Model to use",
           "enum": [
-            "gemini-1.5-flash",
-            "gemini-1.5-pro",
-            "gemini-2.0-flash-exp",
-            "gemini-2.0-flash-thinking-exp"
+            "gemini-2.5-flash",
+            "gemini-2.5-pro",
+            "gemini-2.0-flash",
+            "gemini-3-flash-preview",
+            "gemini-1.5-flash-latest"
           ],
           "enumDescriptions": [
-            "Gemini 1.5 Flash (Fast and efficient)",
-            "Gemini 1.5 Pro (Balanced intelligence and speed)",
-            "Gemini 2.0 Flash (Next-gen performance)",
-            "Gemini 2.0 Flash Thinking (Advanced reasoning/chain of thought)"
+            "Gemini 2.5 Flash (Current stable fast model)",
+            "Gemini 2.5 Pro (Current stable high-intelligence model)",
+            "Gemini 2.0 Flash (Stable 2.0 series)",
+            "Gemini 3 Flash Preview (Next-gen preview)",
+            "Gemini 1.5 Flash Latest (Latest 1.5 series)"
           ]
         },
         "commix.GEMINI_TEMPERATURE": {
