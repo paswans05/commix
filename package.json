@@ -209,6 +209,8 @@
             "gemini-2.5-flash",
             "gemini-2.5-pro",
             "gemini-2.0-flash",
+            "gemini-3-flash",
+            "gemini-3-pro",
             "gemini-3-flash-preview",
             "gemini-1.5-flash-latest"
           ],
@@ -216,6 +218,8 @@
             "Gemini 2.5 Flash (Current stable fast model)",
             "Gemini 2.5 Pro (Current stable high-intelligence model)",
             "Gemini 2.0 Flash (Stable 2.0 series)",
+            "Gemini 3 Flash (New fast model)",
+            "Gemini 3 Pro (New high-intelligence model)",
             "Gemini 3 Flash Preview (Next-gen preview)",
             "Gemini 1.5 Flash Latest (Latest 1.5 series)"
           ]
