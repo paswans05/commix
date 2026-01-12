@@ -13,6 +13,17 @@ All notable changes to **CommiX** will be documented in this file.
 - **Benchmarking**: Added token usage and generation time logging ("CommiX" output channel).
 - **Modular Providers**: Refactored Model Engine for better stability and easier addition of new providers.
 
+---
+
+## [5.1.3] - 2026-01-12
+
+### ✨ Added
+
+- **Gemini 3 Support**: Added `gemini-3-pro` and `gemini-3-flash` models.
+- **Quota Fallback Logic**: Automatically falls back to alternative models (e.g., `gemini-2.5-flash`) if the primary Gemini model hits a rate limit (429 Error).
+
+---
+
 ### ✨ Added
 
 - Added `groq` to AI Providers.
