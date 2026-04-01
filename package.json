@@ -86,10 +86,10 @@
       },
       {
         "command": "commix.preCommitDoc",
-        "title": "CommiX: $(book) Document Prepare",
+        "title": "Doc Generator",
         "icon": {
-          "dark": "assets/images/icon.svg",
-          "light": "assets/images/icon.svg"
+          "dark": "assets/images/logo-doc.svg",
+          "light": "assets/images/logo-doc.svg"
         }
       }
     ],
