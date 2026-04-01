@@ -1,9 +1,11 @@
 import * as vscode from 'vscode';
+import * as path from 'path';
 import { ProviderFactory } from '../providers/factory';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import { ConfigKeys, ConfigurationManager } from '../config';
 import { getRepo } from '../generate-commit-msg';
 import { getDiffStaged } from '../git-utils';
+import simpleGit from 'simple-git';
 
 export async function preCommitDoc(arg?: any) {
   try {
@@ -93,17 +95,52 @@ RULES:
           const documentation = await provider.generateCommitMessage(messages);
 
           if (documentation) {
-            const doc = await vscode.workspace.openTextDocument({
-              content: documentation,
-              language: 'markdown'
+            // Get the current git branch name for the filename
+            const rootPath =
+              repo?.rootUri?.fsPath || vscode.workspace.workspaceFolders?.[0]?.uri?.fsPath;
+            let branchName = 'documentation';
+
+            if (rootPath) {
+              try {
+                const git = simpleGit(rootPath);
+                const branchSummary = await git.branch();
+                branchName = branchSummary.current || 'documentation';
+              } catch {
+                branchName = 'documentation';
+              }
+            }
+
+            // Sanitize branch name for use as filename (replace invalid chars)
+            const safeBranchName = branchName.replace(/[\\/:*?"<>|]/g, '-');
+            const defaultFileName = `${safeBranchName}.txt`;
+
+            // Prompt user to save the file
+            const workspaceFolder = vscode.workspace.workspaceFolders?.[0]?.uri;
+            const defaultUri = workspaceFolder
+              ? vscode.Uri.file(path.join(workspaceFolder.fsPath, defaultFileName))
+              : vscode.Uri.file(defaultFileName);
+
+            const saveUri = await vscode.window.showSaveDialog({
+              defaultUri,
+              filters: { 'Text Files': ['txt'], 'All Files': ['*'] },
+              title: 'Save Technical Documentation'
             });
-            await vscode.window.showTextDocument(doc, {
-              preview: false,
-              viewColumn: vscode.ViewColumn.Beside
-            });
-            vscode.window.showInformationMessage(
-              'Technical Documentation generated successfully!'
-            );
+
+            if (saveUri) {
+              const encoder = new TextEncoder();
+              await vscode.workspace.fs.writeFile(saveUri, encoder.encode(documentation));
+
+              // Open the saved file
+              const doc = await vscode.workspace.openTextDocument(saveUri);
+              await vscode.window.showTextDocument(doc, {
+                preview: false,
+                viewColumn: vscode.ViewColumn.Beside
+              });
+
+              vscode.window.showInformationMessage(
+                `Technical Documentation saved to ${saveUri.fsPath}`
+              );
+            }
           }
         } catch (error: any) {
           vscode.window.showErrorMessage(
