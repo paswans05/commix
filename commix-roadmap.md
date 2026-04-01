@@ -46,6 +46,7 @@ CommiX is growing fast. Here’s the official roadmap outlining what’s coming 
 - [x] AI Snippet Generator
 - [x] AI Test Generator
 - [x] AI Documentation Builder
+- [x] AI Document Prepare (Pre-Commit Technical Docs)
 - [x] Workflow Builder
 - [x] Custom prompt presets
 - [x] Template system

@@ -40,6 +40,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case 'command': {
           const commandMap: Record<string, string> = {
             generate: 'extension.commix',
+            preCommitDoc: 'commix.preCommitDoc',
             edit: 'commix.aiEdit',
             explain: 'commix.aiExplain',
             snippet: 'commix.aiSnippet',
@@ -252,6 +253,15 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                         <div class="card-desc">Generate conventional commit messages from your staged changes automatically.</div>
                         <button class="button" onclick="sendMessage('generate')">
                             Generate Commit
+                        </button>
+                    </div>
+
+                    <!-- Document Prepare Card -->
+                    <div class="card">
+                        <div class="card-title">📋 Document Prepare</div>
+                        <div class="card-desc">Generate technical documentation from your staged changes before committing.</div>
+                        <button class="button" onclick="sendMessage('preCommitDoc')">
+                            Prepare Document
                         </button>
                     </div>
 

@@ -4,6 +4,27 @@ All notable changes to **CommiX** will be documented in this file.
 
 ---
 
+## [5.2.0] - 2026-04-01
+
+### 🚀 New Feature: Document Prepare
+
+- **📋 Document Prepare**: Generate AI-powered technical documentation from your staged git changes — before you commit.
+- Analyzes the staged diff and produces a structured Markdown document covering summary, files changed, technical details, architecture decisions, configuration changes, and usage examples.
+- Accessible from:
+  - **Source Control title bar** (icon button alongside Commit)
+  - **CommiX Sidebar** ("Prepare Document" button)
+  - **Command Palette** → `CommiX: $(book) Document Prepare`
+
+### ✨ Added
+
+- Added `commix.preCommitDoc` command for Document Prepare.
+- Added `PROMPT_PRE_COMMIT_DOC` setting for custom system prompt override.
+- Added Document Prepare button to the SCM title bar navigation.
+- Added "📋 Document Prepare" card to the CommiX Sidebar.
+- Uses `ProviderFactory` — works with all providers (OpenAI, Gemini, NVIDIA, Groq, Ollama).
+
+---
+
 ## [4.0.0] - 2025-12-09
 
 ### 🚀 Major Features (Phase 4 Model Engine Upgrade)

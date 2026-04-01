@@ -35,6 +35,7 @@ CommiX reviews your Git changes and generates clean, conventional commit message
 - 🛠️ Custom system prompt
 - 📏 Follows Conventional Commits specification
 - 🎨 Simple and fast UI inside the Source Control panel
+- 📋 **Document Prepare**: Generate technical documentation from staged changes before committing
 - 📊 **Benchmarking**: View token usage and generation time in the "CommiX" output channel
 
 ---
@@ -84,6 +85,26 @@ CommiX v3.0 introduces a powerful set of AI editing tools:
 - **Convert Code**: Easily convert code between languages (e.g., JS → TS) via `CommiX: Convert Code`.
 - **Diff-based Preview**: All AI edits now open in a **Diff View**, letting you review changes safely before applying.
 - **Smart Patch**: Apply AI suggestions with a single click from the diff view.
+
+---
+
+## 📋 Document Prepare
+
+CommiX can generate **technical documentation** from your staged changes — before you commit.
+
+1. Stage your changes (`git add`)
+2. Click the **"📋 Document Prepare"** button in the **Source Control title bar** or **CommiX Sidebar**
+3. Or run from Command Palette: **"CommiX: $(book) Document Prepare"**
+4. CommiX analyzes your diff and generates a Markdown document covering:
+   - **Summary** of changes
+   - **Files changed** table
+   - **Technical details** — functions, classes, logic, data flow
+   - **Architecture & design decisions**
+   - **Configuration changes**
+   - **Usage examples**
+5. The documentation opens in a new editor tab for review
+
+> 💡 You can customize the prompt via **Settings → CommiX → PROMPT_PRE_COMMIT_DOC**
 
 ---
 

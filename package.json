@@ -83,6 +83,14 @@
       {
         "command": "commix.insertTemplate",
         "title": "CommiX: $(layout) Insert Template"
+      },
+      {
+        "command": "commix.preCommitDoc",
+        "title": "CommiX: $(book) Document Prepare",
+        "icon": {
+          "dark": "assets/images/icon.svg",
+          "light": "assets/images/icon.svg"
+        }
       }
     ],
     "configuration": {
@@ -292,6 +300,10 @@
       "scm/title": [
         {
           "command": "extension.commix",
+          "group": "navigation"
+        },
+        {
+          "command": "commix.preCommitDoc",
           "group": "navigation"
         }
       ],
