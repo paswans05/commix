@@ -4,6 +4,13 @@ All notable changes to **CommiX** will be documented in this file.
 
 ---
 
+## [6.1.1] - 2026-04-29
+
+- [FIX] Updated NVIDIA chat model IDs and added fallback validation for unsupported NVIDIA models.
+- [FIX] Added live-verified NVIDIA NIM chat models from the local API list PDF.
+
+---
+
 ## [5.2.0] - 2026-04-01
 
 ### 🚀 New Feature: Document Prepare

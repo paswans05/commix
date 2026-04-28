@@ -4,3 +4,6 @@ node_modules
 .vscode-test/
 *.vsix
 package-lock.json
+AGENTS.md
+.codex/
+.gitignore
