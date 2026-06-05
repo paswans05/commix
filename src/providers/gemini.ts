@@ -88,18 +88,33 @@ export class GeminiProvider implements AIProvider {
       } catch (error: any) {
         lastError = error;
 
-        // potential 429 errors or quota errors
-        const isQuotaError =
-          error.message?.includes('429') ||
+        // potential 429/500/502/503/504 errors, quota limits, or server-busy errors
+        const isTransientError =
           error.status === 429 ||
-          error.message?.includes('Quota exceeded');
+          error.status === 500 ||
+          error.status === 502 ||
+          error.status === 503 ||
+          error.status === 504 ||
+          error.message?.includes('429') ||
+          error.message?.includes('500') ||
+          error.message?.includes('502') ||
+          error.message?.includes('503') ||
+          error.message?.includes('504') ||
+          error.message?.toLowerCase().includes('quota') ||
+          error.message?.toLowerCase().includes('limit') ||
+          error.message?.toLowerCase().includes('exhausted') ||
+          error.message?.toLowerCase().includes('service unavailable') ||
+          error.message?.toLowerCase().includes('high demand') ||
+          error.message?.toLowerCase().includes('overloaded') ||
+          error.message?.toLowerCase().includes('temporarily') ||
+          error.message?.toLowerCase().includes('rate limit');
 
-        if (isQuotaError) {
+        if (isTransientError) {
           console.warn(
-            `[Gemini] Model ${modelName} hit quota limit. Trying next model...`
+            `[Gemini] Model ${modelName} encountered a transient error: ${error.message || error}. Trying next model...`
           );
           Logger.log(
-            `[Gemini] Warning: Model ${modelName} hit quota limit. Falling back...`
+            `[Gemini] Warning: Model ${modelName} failed with transient error. Falling back...`
           );
           continue; // Try next model
         }
