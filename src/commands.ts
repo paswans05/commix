@@ -43,6 +43,32 @@ export class CommandManager {
       }
     });
 
+    // Show available NVIDIA models
+    this.registerCommand('commix.showAvailableNvidiaModels', async () => {
+      const configManager = ConfigurationManager.getInstance();
+      try {
+        const models = await configManager.getAvailableNvidiaModels();
+        if (models.length === 0) {
+          throw new Error('No models returned from NVIDIA API. Please ensure your NVIDIA API Key is valid and configured.');
+        }
+        const selected = await vscode.window.showQuickPick(models, {
+          placeHolder: 'Please select an NVIDIA model'
+        });
+
+        if (selected) {
+          const config = vscode.workspace.getConfiguration('commix');
+          await config.update(
+            'NVIDIA_MODEL',
+            selected,
+            vscode.ConfigurationTarget.Global
+          );
+          vscode.window.showInformationMessage(`NVIDIA Model updated to: ${selected}`);
+        }
+      } catch (err) {
+        vscode.window.showErrorMessage(`Failed to retrieve NVIDIA models: ${err.message}`);
+      }
+    });
+
     this.registerCommand('commix.aiEdit', aiEdit);
     this.registerCommand('commix.aiExplain', aiExplain);
     this.registerCommand('commix.aiConvert', aiConvert);

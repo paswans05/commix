@@ -49,6 +49,10 @@
         "title": "Show Available OpenAI Models"
       },
       {
+        "command": "commix.showAvailableNvidiaModels",
+        "title": "Show Available NVIDIA Models"
+      },
+      {
         "command": "commix.aiEdit",
         "title": "CommiX: $(edit) AI Edit / Refactor"
       },
@@ -246,10 +250,10 @@
         },
         "commix.NVIDIA_MODEL": {
           "type": "string",
-          "default": "meta/llama-3.1-70b-instruct",
-          "description": "Select the NVIDIA-hosted model for AI generation",
+          "default": "meta/llama-3.3-70b-instruct",
+          "description": "Select the NVIDIA-hosted model for AI generation, or run 'Show Available NVIDIA Models' to fetch the latest available models.",
           "enum": [
-            "meta/llama-3.1-70b-instruct",
+            "meta/llama-3.3-70b-instruct",
             "meta/llama-3.1-8b-instruct",
             "google/gemma-2-9b-it",
             "microsoft/phi-3.5-mini-instruct",
@@ -261,7 +265,7 @@
             "deepseek-coder-v2-lite"
           ],
           "enumDescriptions": [
-            "LLaMA 3.1 70B — Best quality, strong reasoning, ideal for coding + conversation.",
+            "LLaMA 3.3 70B — State-of-the-art open model, excellent reasoning and coding capabilities.",
             "LLaMA 3.1 8B — Fast, light, cheaper; great for general tasks.",
             "Gemma 2 9B — High-quality mid-size model with strong creativity and reasoning.",
             "Phi-3.5 Mini — Ultra-fast and cost-efficient, best for lightweight tasks.",

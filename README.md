@@ -125,7 +125,7 @@ These settings are available under:
 | `SYSTEM_PROMPT`  | string  | —                             | No              | Custom system prompt                 |
 | `ENABLE_GITMOJI` | boolean | `false`                       | No              | Enable Gitmoji                       |
 | `NVIDIA_API_KEY` | string  | —                             | Yes (if nvidia) | NVIDIA API Key                       |
-| `NVIDIA_MODEL`   | string  | `meta/llama-3.1-70b-instruct` | Yes             | Model used                           |
+| `NVIDIA_MODEL`   | string  | `meta/llama-3.3-70b-instruct` | Yes             | Model used                           |
 
 ---
 
@@ -192,7 +192,7 @@ Follow this guide to generate API keys for each provider.
 
 **Recommended Models:**
 
-- `meta/llama-3.1-70b-instruct`
+- `meta/llama-3.3-70b-instruct`
 - `meta/llama-3.1-8b-instruct`
 - `google/gemma-2-9b-it`
 - `deepseek-r1`

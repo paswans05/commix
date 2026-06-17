@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import OpenAI from 'openai';
 import { createOpenAIApi } from './openai-utils';
 
 /**
@@ -65,6 +66,10 @@ export class ConfigurationManager {
         ) {
           this.updateOpenAIModelList();
         }
+
+        if (event.affectsConfiguration('commix.NVIDIA_API_KEY')) {
+          this.updateNvidiaModelList();
+        }
       }
     });
   }
@@ -125,5 +130,51 @@ export class ConfigurationManager {
       await this.updateOpenAIModelList();
     }
     return this.context.globalState.get<string[]>('availableOpenAIModels', []);
+  }
+
+  /**
+   * Updates the list of available NVIDIA models.
+   */
+  private async updateNvidiaModelList() {
+    try {
+      const apiKey = this.getConfig<string>(ConfigKeys.NVIDIA_API_KEY);
+      if (!apiKey) {
+        return;
+      }
+      const openai = new OpenAI({
+        apiKey,
+        baseURL: 'https://integrate.api.nvidia.com/v1'
+      });
+      const models = await openai.models.list();
+
+      // Save available models to extension state
+      await this.context.globalState.update(
+        'availableNvidiaModels',
+        models.data.map((model) => model.id)
+      );
+
+      // Get the current selected model
+      const config = vscode.workspace.getConfiguration('commix');
+      const currentModel = config.get<string>('NVIDIA_MODEL');
+
+      // If the current selected model is not in the available list, set it to the default value
+      const availableModels = models.data.map((model) => model.id);
+      if (!availableModels.includes(currentModel)) {
+        await config.update('NVIDIA_MODEL', 'meta/llama-3.3-70b-instruct', vscode.ConfigurationTarget.Global);
+      }
+    } catch (error) {
+      console.error('Failed to fetch NVIDIA models:', error);
+    }
+  }
+
+  /**
+   * Retrieves the list of available NVIDIA models.
+   * @returns {Promise<string[]>} The list of available NVIDIA models.
+   */
+  public async getAvailableNvidiaModels(): Promise<string[]> {
+    if (!this.context.globalState.get<string[]>('availableNvidiaModels')) {
+      await this.updateNvidiaModelList();
+    }
+    return this.context.globalState.get<string[]>('availableNvidiaModels', []);
   }
 }
