@@ -3,7 +3,7 @@ import { ProviderFactory } from '../providers/factory';
 import { ChatCompletionMessageParam } from 'openai/resources';
 import { ConfigKeys, ConfigurationManager } from '../config';
 
-export async function aiDoc() {
+export async function aiDoc(range?: vscode.Range) {
   try {
     // Get active editor
     const editor = vscode.window.activeTextEditor;
@@ -13,7 +13,9 @@ export async function aiDoc() {
     }
 
     // Get selected text or entire file
-    const selection = editor.selection;
+    const selection = range
+      ? new vscode.Selection(range.start, range.end)
+      : editor.selection;
     const selectedText = editor.document.getText(
       selection.isEmpty ? undefined : selection
     );

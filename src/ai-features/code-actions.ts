@@ -45,6 +45,15 @@ export class AIActionProvider implements vscode.CodeActionProvider {
         };
         actions.push(convertAction);
 
+        // Generate Documentation Action
+        const docAction = new vscode.CodeAction('CommiX: Generate Documentation', vscode.CodeActionKind.RefactorRewrite);
+        docAction.command = {
+            command: 'commix.aiDoc',
+            title: 'CommiX: Generate Documentation',
+            arguments: [range]
+        };
+        actions.push(docAction);
+
 		return actions;
 	}
 }

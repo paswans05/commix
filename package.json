@@ -322,6 +322,11 @@
           "command": "commix.aiConvert",
           "group": "commix-group@3",
           "when": "editorHasSelection"
+        },
+        {
+          "command": "commix.aiDoc",
+          "group": "commix-group@4",
+          "when": "editorHasSelection"
         }
       ]
     },
