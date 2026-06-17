@@ -32,7 +32,7 @@ export class NvidiaProvider implements AIProvider {
     const configManager = ConfigurationManager.getInstance();
     const model =
       configManager.getConfig<string>(ConfigKeys.NVIDIA_MODEL) ||
-      'meta/llama-3.3-70b-instruct';
+      'meta/llama-3.2-3b-instruct';
     const temperature = configManager.getConfig<number>(
       ConfigKeys.OPENAI_TEMPERATURE,
       0.7

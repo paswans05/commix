@@ -218,21 +218,21 @@
           "default": "gemini-2.5-flash",
           "description": "Gemini Model to use",
           "enum": [
+            "gemini-3.5-flash",
+            "gemini-3.1-pro",
+            "gemini-3.1-flash-lite",
             "gemini-2.5-flash",
             "gemini-2.5-pro",
             "gemini-2.0-flash",
-            "gemini-3-flash",
-            "gemini-3-pro",
-            "gemini-3-flash-preview",
             "gemini-1.5-flash-latest"
           ],
           "enumDescriptions": [
+            "Gemini 3.5 Flash (Latest fast, high-performance model)",
+            "Gemini 3.1 Pro (Latest complex reasoning model)",
+            "Gemini 3.1 Flash-Lite (Latest highly-efficient model)",
             "Gemini 2.5 Flash (Current stable fast model)",
             "Gemini 2.5 Pro (Current stable high-intelligence model)",
             "Gemini 2.0 Flash (Stable 2.0 series)",
-            "Gemini 3 Flash (New fast model)",
-            "Gemini 3 Pro (New high-intelligence model)",
-            "Gemini 3 Flash Preview (Next-gen preview)",
             "Gemini 1.5 Flash Latest (Latest 1.5 series)"
           ]
         },
@@ -250,31 +250,31 @@
         },
         "commix.NVIDIA_MODEL": {
           "type": "string",
-          "default": "meta/llama-3.3-70b-instruct",
+          "default": "meta/llama-3.2-3b-instruct",
           "description": "Select the NVIDIA-hosted model for AI generation, or run 'Show Available NVIDIA Models' to fetch the latest available models.",
           "enum": [
-            "meta/llama-3.3-70b-instruct",
-            "meta/llama-3.1-8b-instruct",
+            "meta/llama-3.2-3b-instruct",
             "google/gemma-2-9b-it",
             "microsoft/phi-3.5-mini-instruct",
-            "nvidia/llava-llama3-8b",
-            "nvidia/nv-embedqa-e5-v5",
             "qwen2.5-7b-instruct",
+            "deepseek-coder-v2-lite",
+            "meta/llama-3.3-70b-instruct",
             "qwen2.5-72b-instruct",
             "deepseek-r1",
-            "deepseek-coder-v2-lite"
+            "nvidia/llava-llama3-8b",
+            "nvidia/nv-embedqa-e5-v5"
           ],
           "enumDescriptions": [
-            "LLaMA 3.3 70B — State-of-the-art open model, excellent reasoning and coding capabilities.",
-            "LLaMA 3.1 8B — Fast, light, cheaper; great for general tasks.",
-            "Gemma 2 9B — High-quality mid-size model with strong creativity and reasoning.",
-            "Phi-3.5 Mini — Ultra-fast and cost-efficient, best for lightweight tasks.",
-            "NVIDIA LLava Vision — Supports image + text inputs for multimodal tasks.",
-            "NVIDIA NV-Embed — Embedding model for semantic search & RAG pipelines.",
-            "Qwen 2.5 7B — Strong coding + reasoning in a compact size.",
-            "Qwen 2.5 72B — Very high accuracy, strong reasoning and code generation.",
-            "DeepSeek R1 — Advanced reasoning model (RL based), great for deep problem solving.",
-            "DeepSeek Coder V2 Lite — Fast, optimized model for code generation."
+            "LLaMA 3.2 3B — Next-generation fast, light, free, and efficient model; excellent for general tasks.",
+            "Gemma 2 9B — High-quality mid-size model with strong creativity and reasoning. Fast and free.",
+            "Phi-3.5 Mini — Ultra-fast and cost-efficient, best for lightweight tasks. Free.",
+            "Qwen 2.5 7B — Strong coding + reasoning in a compact size. Fast and free.",
+            "DeepSeek Coder V2 Lite — Fast, optimized model for code generation. Free.",
+            "LLaMA 3.3 70B — State-of-the-art open model, excellent reasoning and coding capabilities. Free, but slower.",
+            "Qwen 2.5 72B — Very high accuracy, strong reasoning and code generation. Free, but slower.",
+            "DeepSeek R1 — Advanced reasoning model (RL based), great for deep problem solving. Free, but slower.",
+            "NVIDIA LLava Vision — Supports image + text inputs for multimodal tasks. Free.",
+            "NVIDIA NV-Embed — Embedding model for semantic search & RAG pipelines. Free."
           ]
         },
         "commix.GROQ_API_KEY": {

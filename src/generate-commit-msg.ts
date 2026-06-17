@@ -135,12 +135,13 @@ export async function generateCommitMsg(arg) {
       } catch (err) {
         let errorMessage = 'An unexpected error occurred';
         const providerName = aiProvider || 'Unknown Provider';
+        const status = err.status || err.response?.status;
 
-        if (err.response?.status) {
+        if (status) {
           // OpenAI-compatible error handling
-          switch (err.response.status) {
+          switch (status) {
             case 401:
-              errorMessage = `Invalid ${providerName} API key or unauthorized access`;
+              errorMessage = `Invalid ${providerName} API key or unauthorized access. Please check your key in Settings.`;
               break;
             case 429:
               errorMessage = `${providerName} rate limit exceeded. Please try again later`;

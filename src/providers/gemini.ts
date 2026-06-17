@@ -33,9 +33,10 @@ export class GeminiProvider implements AIProvider {
     );
 
     // List of fallback models to try in order
-    // We start with the configured model, then try backups if it fails with quota issues
+    // We start with the configured model, then try backups if it fails with quota/404 issues
     const fallbackModels = [
-      'gemini-3-flash',
+      'gemini-3.5-flash',
+      'gemini-3.1-pro',
       'gemini-2.5-flash',
       'gemini-2.0-flash',
       'gemini-1.5-flash'
@@ -88,13 +89,15 @@ export class GeminiProvider implements AIProvider {
       } catch (error: any) {
         lastError = error;
 
-        // potential 429/500/502/503/504 errors, quota limits, or server-busy errors
+        // potential 404 (model not found), 429/500/502/503/504 errors, quota limits, or server-busy errors
         const isTransientError =
+          error.status === 404 ||
           error.status === 429 ||
           error.status === 500 ||
           error.status === 502 ||
           error.status === 503 ||
           error.status === 504 ||
+          error.message?.includes('404') ||
           error.message?.includes('429') ||
           error.message?.includes('500') ||
           error.message?.includes('502') ||
