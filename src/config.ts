@@ -70,6 +70,10 @@ export class ConfigurationManager {
         if (event.affectsConfiguration('commix.NVIDIA_API_KEY')) {
           this.updateNvidiaModelList();
         }
+
+        if (event.affectsConfiguration('commix.GEMINI_API_KEY')) {
+          this.updateGeminiModelList();
+        }
       }
     });
   }
@@ -125,8 +129,8 @@ export class ConfigurationManager {
    * Retrieves the list of available OpenAI models.
    * @returns {Promise<string[]>} The list of available OpenAI models.
    */
-  public async getAvailableOpenAIModels(): Promise<string[]> {
-    if (!this.context.globalState.get<string[]>('availableOpenAIModels')) {
+  public async getAvailableOpenAIModels(forceRefresh = false): Promise<string[]> {
+    if (forceRefresh || !this.context.globalState.get<string[]>('availableOpenAIModels')) {
       await this.updateOpenAIModelList();
     }
     return this.context.globalState.get<string[]>('availableOpenAIModels', []);
@@ -171,10 +175,65 @@ export class ConfigurationManager {
    * Retrieves the list of available NVIDIA models.
    * @returns {Promise<string[]>} The list of available NVIDIA models.
    */
-  public async getAvailableNvidiaModels(): Promise<string[]> {
-    if (!this.context.globalState.get<string[]>('availableNvidiaModels')) {
+  public async getAvailableNvidiaModels(forceRefresh = false): Promise<string[]> {
+    if (forceRefresh || !this.context.globalState.get<string[]>('availableNvidiaModels')) {
       await this.updateNvidiaModelList();
     }
     return this.context.globalState.get<string[]>('availableNvidiaModels', []);
+  }
+
+  /**
+   * Updates the list of available Gemini models.
+   */
+  private async updateGeminiModelList() {
+    try {
+      const apiKey = this.getConfig<string>(ConfigKeys.GEMINI_API_KEY);
+      if (!apiKey) {
+        return;
+      }
+      
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = (await response.json()) as {
+        models: Array<{ name: string; supportedGenerationMethods: string[] }>;
+      };
+      
+      // Filter models that support generateContent
+      const availableModels = data.models
+        .filter((model) => model.supportedGenerationMethods.includes('generateContent'))
+        .map((model) => model.name.replace('models/', ''));
+
+      // Save available models to extension state
+      await this.context.globalState.update(
+        'availableGeminiModels',
+        availableModels
+      );
+
+      // Get the current selected model
+      const config = vscode.workspace.getConfiguration('commix');
+      const currentModel = config.get<string>('GEMINI_MODEL');
+
+      // If the current selected model is not in the available list, set it to the default value
+      if (!availableModels.includes(currentModel)) {
+        await config.update('GEMINI_MODEL', 'gemini-2.5-flash', vscode.ConfigurationTarget.Global);
+      }
+    } catch (error) {
+      console.error('Failed to fetch Gemini models:', error);
+    }
+  }
+
+  /**
+   * Retrieves the list of available Gemini models.
+   * @returns {Promise<string[]>} The list of available Gemini models.
+   */
+  public async getAvailableGeminiModels(forceRefresh = false): Promise<string[]> {
+    if (forceRefresh || !this.context.globalState.get<string[]>('availableGeminiModels')) {
+      await this.updateGeminiModelList();
+    }
+    return this.context.globalState.get<string[]>('availableGeminiModels', []);
   }
 }

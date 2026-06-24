@@ -28,7 +28,7 @@ export class CommandManager {
     // Show available OpenAI models
     this.registerCommand('commix.showAvailableModels', async () => {
       const configManager = ConfigurationManager.getInstance();
-      const models = await configManager.getAvailableOpenAIModels();
+      const models = await configManager.getAvailableOpenAIModels(true);
       const selected = await vscode.window.showQuickPick(models, {
         placeHolder: 'Please select a model'
       });
@@ -47,7 +47,7 @@ export class CommandManager {
     this.registerCommand('commix.showAvailableNvidiaModels', async () => {
       const configManager = ConfigurationManager.getInstance();
       try {
-        const models = await configManager.getAvailableNvidiaModels();
+        const models = await configManager.getAvailableNvidiaModels(true);
         if (models.length === 0) {
           throw new Error('No models returned from NVIDIA API. Please ensure your NVIDIA API Key is valid and configured.');
         }
@@ -66,6 +66,32 @@ export class CommandManager {
         }
       } catch (err) {
         vscode.window.showErrorMessage(`Failed to retrieve NVIDIA models: ${err.message}`);
+      }
+    });
+
+    // Show available Gemini models
+    this.registerCommand('commix.showAvailableGeminiModels', async () => {
+      const configManager = ConfigurationManager.getInstance();
+      try {
+        const models = await configManager.getAvailableGeminiModels(true);
+        if (models.length === 0) {
+          throw new Error('No models returned from Gemini API. Please ensure your Gemini API Key is valid and configured.');
+        }
+        const selected = await vscode.window.showQuickPick(models, {
+          placeHolder: 'Please select a Gemini model'
+        });
+
+        if (selected) {
+          const config = vscode.workspace.getConfiguration('commix');
+          await config.update(
+            'GEMINI_MODEL',
+            selected,
+            vscode.ConfigurationTarget.Global
+          );
+          vscode.window.showInformationMessage(`Gemini Model updated to: ${selected}`);
+        }
+      } catch (err) {
+        vscode.window.showErrorMessage(`Failed to retrieve Gemini models: ${err.message}`);
       }
     });
 
